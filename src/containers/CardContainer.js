@@ -2,22 +2,23 @@ import { Card } from '../components'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { getCountries } from '../redux/countries/actions'
+import CardSkeleton from '../utility-components/CardSkeleton'
 
 const CardContainer = () => {
   const { isLoading, countries } = useSelector(globalState => globalState.countriesState)
   const dispatch = useDispatch()
 
+  //del later
+  console.log(isLoading)
+
   useEffect(() => {
     dispatch(getCountries())
   }, [dispatch])
 
-  //del later
-  console.log(countries[0])
-
   return (
     <Card>
       <Card.Frame>
-        {isLoading && <h2>Loading...</h2>}
+        {isLoading && <CardSkeleton />}
         {countries.map(country => {
           const { id, flags, name, population, region, capital } = country
           return (

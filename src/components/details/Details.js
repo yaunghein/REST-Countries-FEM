@@ -1,10 +1,12 @@
 import { Section } from '../../utility-components'
 import {
   Frame,
+  BackButton,
   Flag,
   Content,
   CountryName,
   MetaFrame,
+  MetaGroup,
   BorderCountriesFrame,
   BorderCountriesGroup,
   BorderCountry,
@@ -16,6 +18,14 @@ export default function Details({ children, ...restProps }) {
 
 Details.Frame = function DetailsFrame({ children, ...restProps }) {
   return <Frame {...restProps}>{children}</Frame>
+}
+
+Details.BackButton = function DetailsBackButton({ children, ...restProps }) {
+  return <BackButton {...restProps}>{children}</BackButton>
+}
+
+Details.MetaGroup = function DetailsMetaGroup({ children, ...restProps }) {
+  return <MetaGroup {...restProps}>{children}</MetaGroup>
 }
 
 Details.Flag = function DetailsFlag({ ...restProps }) {

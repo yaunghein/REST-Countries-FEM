@@ -13,6 +13,8 @@ const GlobalStyles = createGlobalStyle`${css`
     --clr-background: hsl(0, 0%, 98%);
     --clr-input: hsl(0, 0%, 52%);
     --clr-text: hsl(200, 15%, 8%);
+
+    --timing-cubic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   html {
