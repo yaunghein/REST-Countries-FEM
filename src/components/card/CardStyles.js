@@ -3,36 +3,45 @@ import { Link } from 'react-router-dom'
 
 export const Frame = styled.main`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
   gap: 2.78em;
+`
+export const Heading = styled.h2`
+  margin-bottom: 1.6em;
 `
 
 export const Item = styled(Link)`
   overflow: hidden;
   border-radius: 0.56em;
-  background: var(--clr-element);
-  box-shadow: 0px 2px 5px 0 rgba(80, 80, 80, 0.08);
-  animation: growUp 0.2s var(--timing-cubic) forwards;
+  background: ${({ theme }) => theme.element};
+  box-shadow: 0px 5px 8px 0 rgba(30, 30, 30, 0.08);
+  animation: fadeIn 0.2s ease-out forwards;
+  transition: all 0.2s var(--timing-cubic);
 
-  @keyframes growUp {
+  @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(2em);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
     }
+  }
+
+  &:hover {
+    transform: translateY(-1em) scale(1.05) rotate(1deg);
+    box-shadow: 0px 8px 32px 0 rgba(30, 30, 30, 0.1);
   }
 `
 
 export const Flag = styled.img`
   width: 100%;
   height: 13em;
+  margin-bottom: -0.4em;
 `
 
 export const Content = styled.div`
-  padding: 1.67em 1.67em 2.22em;
+  padding: 2.07em 1.67em 2.22em;
+  background: ${({ theme }) => theme.element};
 `
 
 export const CountryName = styled.h2`

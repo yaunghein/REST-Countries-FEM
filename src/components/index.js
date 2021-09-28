@@ -1,3 +1,5 @@
 export { default as Header } from './header/Header'
 export { default as Card } from './card/Card'
 export { default as Details } from './details/Details'
+export { default as SearchBox } from './search-box/SearchBox'
+export { default as RegionFilterBox } from './region-filter-box/RegionFilterBox'

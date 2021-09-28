@@ -1,4 +1,5 @@
 import ContentLoader from 'react-content-loader'
+import { withTheme } from 'styled-components'
 
 const CardSkeleton = props => {
   return (
@@ -8,8 +9,8 @@ const CardSkeleton = props => {
         width={264}
         height={289}
         viewBox='0 0 264 289'
-        backgroundColor='#f5f5f5'
-        foregroundColor='#ecebeb'
+        backgroundColor={props.theme.skeletonBackground}
+        foregroundColor={props.theme.skeletonForeground}
         {...props}>
         <rect x='0' y='0' rx='8' ry='8' width='264' height='153' />
         <rect x='0' y='177' rx='4' ry='4' width='90' height='24' />
@@ -22,8 +23,8 @@ const CardSkeleton = props => {
         width={264}
         height={289}
         viewBox='0 0 264 289'
-        backgroundColor='#f5f5f5'
-        foregroundColor='#ecebeb'
+        backgroundColor={props.theme.skeletonBackground}
+        foregroundColor={props.theme.skeletonForeground}
         {...props}>
         <rect x='0' y='0' rx='8' ry='8' width='264' height='153' />
         <rect x='0' y='177' rx='4' ry='4' width='90' height='24' />
@@ -36,8 +37,8 @@ const CardSkeleton = props => {
         width={264}
         height={289}
         viewBox='0 0 264 289'
-        backgroundColor='#f5f5f5'
-        foregroundColor='#ecebeb'
+        backgroundColor={props.theme.skeletonBackground}
+        foregroundColor={props.theme.skeletonForeground}
         {...props}>
         <rect x='0' y='0' rx='8' ry='8' width='264' height='153' />
         <rect x='0' y='177' rx='4' ry='4' width='90' height='24' />
@@ -50,8 +51,8 @@ const CardSkeleton = props => {
         width={264}
         height={289}
         viewBox='0 0 264 289'
-        backgroundColor='#f5f5f5'
-        foregroundColor='#ecebeb'
+        backgroundColor={props.theme.skeletonBackground}
+        foregroundColor={props.theme.skeletonForeground}
         {...props}>
         <rect x='0' y='0' rx='8' ry='8' width='264' height='153' />
         <rect x='0' y='177' rx='4' ry='4' width='90' height='24' />
@@ -64,8 +65,8 @@ const CardSkeleton = props => {
         width={264}
         height={289}
         viewBox='0 0 264 289'
-        backgroundColor='#f5f5f5'
-        foregroundColor='#ecebeb'
+        backgroundColor={props.theme.skeletonBackground}
+        foregroundColor={props.theme.skeletonForeground}
         {...props}>
         <rect x='0' y='0' rx='8' ry='8' width='264' height='153' />
         <rect x='0' y='177' rx='4' ry='4' width='90' height='24' />
@@ -78,8 +79,8 @@ const CardSkeleton = props => {
         width={264}
         height={289}
         viewBox='0 0 264 289'
-        backgroundColor='#f5f5f5'
-        foregroundColor='#ecebeb'
+        backgroundColor={props.theme.skeletonBackground}
+        foregroundColor={props.theme.skeletonForeground}
         {...props}>
         <rect x='0' y='0' rx='8' ry='8' width='264' height='153' />
         <rect x='0' y='177' rx='4' ry='4' width='90' height='24' />
@@ -92,8 +93,8 @@ const CardSkeleton = props => {
         width={264}
         height={289}
         viewBox='0 0 264 289'
-        backgroundColor='#f5f5f5'
-        foregroundColor='#ecebeb'
+        backgroundColor={props.theme.skeletonBackground}
+        foregroundColor={props.theme.skeletonForeground}
         {...props}>
         <rect x='0' y='0' rx='8' ry='8' width='264' height='153' />
         <rect x='0' y='177' rx='4' ry='4' width='90' height='24' />
@@ -106,8 +107,8 @@ const CardSkeleton = props => {
         width={264}
         height={289}
         viewBox='0 0 264 289'
-        backgroundColor='#f5f5f5'
-        foregroundColor='#ecebeb'
+        backgroundColor={props.theme.skeletonBackground}
+        foregroundColor={props.theme.skeletonForeground}
         {...props}>
         <rect x='0' y='0' rx='8' ry='8' width='264' height='153' />
         <rect x='0' y='177' rx='4' ry='4' width='90' height='24' />
@@ -119,4 +120,4 @@ const CardSkeleton = props => {
   )
 }
 
-export default CardSkeleton
+export default withTheme(CardSkeleton)

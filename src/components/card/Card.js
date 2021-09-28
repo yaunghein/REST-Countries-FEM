@@ -1,5 +1,5 @@
 import { Section } from '../../utility-components'
-import { Frame, Item, Flag, Content, CountryName, MetaGroup, MetaKey, MetaValue } from './CardStyles'
+import { Frame, Heading, Item, Flag, Content, CountryName, MetaGroup, MetaKey, MetaValue } from './CardStyles'
 
 export default function Card({ children, ...restProps }) {
   return <Section {...restProps}>{children}</Section>
@@ -9,6 +9,9 @@ Card.Frame = function CardFrame({ children, ...restProps }) {
   return <Frame {...restProps}>{children}</Frame>
 }
 
+Card.Heading = function CardHeading({ children, ...restProps }) {
+  return <Heading {...restProps}>{children}</Heading>
+}
 Card.Item = function CardItem({ children, ...restProps }) {
   return <Item {...restProps}>{children}</Item>
 }

@@ -19,7 +19,11 @@ const GlobalStyles = createGlobalStyle`${css`
 
   html {
     font-size: 1vw;
-    color: var(---clr-text);
+    color: ${({ theme }) => theme.text};
+
+    /* @media (min-width: 1920px) {
+      font-size: 16px;
+    } */
 
     @media (max-width: 1000px) {
       font-size: 16px;
@@ -27,7 +31,8 @@ const GlobalStyles = createGlobalStyle`${css`
   }
 
   body {
-    background: var(--clr-background);
+    background: ${({ theme }) => theme.background};
+    transition: all 0.2s ease;
   }
 
   img {

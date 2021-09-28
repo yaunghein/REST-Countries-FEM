@@ -8,7 +8,7 @@ export const getCountries = () => {
       dispatch({ type: ACTION_TYPES.GET_COUNTRIES_REQUEST })
     }
     axios
-      .get('https://restcountries.com/v2/all')
+      .get('https://restcountries.com/v3/all')
       .then(resp => {
         dispatch({
           type: ACTION_TYPES.GET_COUNTRIES_SUCCESS,
@@ -25,7 +25,7 @@ export const getSelectedCountry = country => {
   return dispatch => {
     dispatch({ type: ACTION_TYPES.GET_SELECTED_COUNTRY_REQUEST })
     axios
-      .get(`https://restcountries.com/v2/name/${country}`)
+      .get(`https://restcountries.com/v3/name/${country}`)
       .then(resp => {
         dispatch({
           type: ACTION_TYPES.GET_SELECTED_COUNTRY_SUCCESS,
@@ -41,5 +41,28 @@ export const getSelectedCountry = country => {
 export const removeSelectedCountry = () => {
   return {
     type: ACTION_TYPES.REMOVE_SELECTED_COUNTRY,
+  }
+}
+
+export const getRelatedCountries = region => {
+  return dispatch => {
+    dispatch({ type: ACTION_TYPES.GET_RELATED_COUNTRIES_REQUEST })
+    axios
+      .get(`https://restcountries.com/v3/region/${region}`)
+      .then(resp => {
+        dispatch({
+          type: ACTION_TYPES.GET_RELATED_COUNTRIES_SUCCESS,
+          payload: resp.data.map((item, index) => ({ id: index + 1, ...item })),
+        })
+      })
+      .catch(() => {
+        dispatch({ type: ACTION_TYPES.GET_RELATED_COUNTRIES_FAILURE })
+      })
+  }
+}
+
+export const removeRelatedCountries = () => {
+  return {
+    type: ACTION_TYPES.REMOVE_RELATED_COUNTRIES,
   }
 }

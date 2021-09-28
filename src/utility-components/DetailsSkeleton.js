@@ -1,4 +1,5 @@
 import ContentLoader from 'react-content-loader'
+import { withTheme } from 'styled-components'
 
 const DetailsSkeleton = props => {
   return (
@@ -7,8 +8,8 @@ const DetailsSkeleton = props => {
       width={1276}
       height={403}
       viewBox='0 0 1276 403'
-      backgroundColor='#f5f5f5'
-      foregroundColor='#ecebeb'
+      backgroundColor={props.theme.skeletonBackground}
+      foregroundColor={props.theme.skeletonForeground}
       {...props}>
       <rect x='0' y='0' rx='8' ry='8' width='560' height='403' />
       <rect x='674' y='48' rx='8' ry='8' width='151' height='24' />
@@ -28,4 +29,4 @@ const DetailsSkeleton = props => {
   )
 }
 
-export default DetailsSkeleton
+export default withTheme(DetailsSkeleton)

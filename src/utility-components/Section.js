@@ -16,5 +16,9 @@ const Container = styled.div`
   @media (max-width: 1000px) {
     padding: 2.78em;
   }
+
+  @media (max-width: 600px) {
+    padding: 1.11em;
+  }
 `
 Container.displayName = 'Container'
