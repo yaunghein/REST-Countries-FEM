@@ -11,7 +11,9 @@ const App = () => {
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyles />
-      <Router basename='/REST-Countries-FEM'>
+      {/* "homepage": "https://yaunghein.github.io/REST-Countries-FEM", */}
+      {/* <Router basename='/REST-Countries-FEM'> */}
+      <Router>
         <HeaderContainer theme={theme} toggleTheme={toggleTheme} />
         <Switch>
           <Route exact path='/' component={Home} />

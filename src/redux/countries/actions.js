@@ -8,7 +8,7 @@ export const getCountries = () => {
       dispatch({ type: ACTION_TYPES.GET_COUNTRIES_REQUEST })
     }
     axios
-      .get('https://restcountries.com/v3/all')
+      .get('https://restcountries.com/v2/all')
       .then(resp => {
         dispatch({
           type: ACTION_TYPES.GET_COUNTRIES_SUCCESS,
@@ -25,7 +25,7 @@ export const getSelectedCountry = country => {
   return dispatch => {
     dispatch({ type: ACTION_TYPES.GET_SELECTED_COUNTRY_REQUEST })
     axios
-      .get(`https://restcountries.com/v3/name/${country}`)
+      .get(`https://restcountries.com/v2/name/${country}`)
       .then(resp => {
         dispatch({
           type: ACTION_TYPES.GET_SELECTED_COUNTRY_SUCCESS,
@@ -48,7 +48,7 @@ export const getRelatedCountries = region => {
   return dispatch => {
     dispatch({ type: ACTION_TYPES.GET_RELATED_COUNTRIES_REQUEST })
     axios
-      .get(`https://restcountries.com/v3/region/${region}`)
+      .get(`https://restcountries.com/v2/continent/${region}`)
       .then(resp => {
         dispatch({
           type: ACTION_TYPES.GET_RELATED_COUNTRIES_SUCCESS,

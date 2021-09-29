@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { getCountries } from '../redux/countries/actions'
 import { CardSkeleton, Group } from '../utility-components'
+import { formatPopulation } from '../helpers/formatPopulation'
 
 const CardContainer = () => {
   const { isLoading, countries } = useSelector(globalState => globalState.countriesState)
@@ -10,7 +11,7 @@ const CardContainer = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedRegion, setSelectedRegion] = useState('')
   const filteredCountries = countries
-    .filter(country => country.name.common.toLowerCase().includes(searchTerm.toLowerCase()))
+    .filter(country => country.name.toLowerCase().includes(searchTerm.toLowerCase()))
     .filter(country => country.region.toLowerCase().includes(selectedRegion))
 
   //del later
@@ -37,17 +38,12 @@ const CardContainer = () => {
         {isLoading && <CardSkeleton />}
         {/* searchTerm is empty at first, so filteredCountries match all countries from redux state */}
         {filteredCountries.map(country => {
-          const { id, flags, name, region, capital, unMember } = country
+          const { id, flags, name, region, capital, population } = country
           return (
-            <Card.Item key={id} to={`/${name.common.toLowerCase()}`}>
-              <Card.Flag src={flags[0]} alt={`${name.common}-flag`} />
+            <Card.Item key={id} to={`/${name.toLowerCase()}`}>
+              <Card.Flag src={flags?.svg} alt={`${name}-flag`} />
               <Card.Content>
-                <Card.CountryName>{name.common}</Card.CountryName>
-                {/* population is not provided in v3 of api */}
-                {/* <Card.MetaGroup>
-                  <Card.MetaKey>Population:</Card.MetaKey>
-                  <Card.MetaValue>{population}</Card.MetaValue>
-                </Card.MetaGroup> */}
+                <Card.CountryName>{name}</Card.CountryName>
                 <Card.MetaGroup>
                   <Card.MetaKey>Region:</Card.MetaKey>
                   <Card.MetaValue>{region}</Card.MetaValue>
@@ -57,8 +53,8 @@ const CardContainer = () => {
                   <Card.MetaValue>{capital || 'Not provided'}</Card.MetaValue>
                 </Card.MetaGroup>
                 <Card.MetaGroup>
-                  <Card.MetaKey>UN Member: </Card.MetaKey>
-                  <Card.MetaValue>{unMember ? 'Yes' : 'No'}</Card.MetaValue>
+                  <Card.MetaKey>Population: </Card.MetaKey>
+                  <Card.MetaValue>{formatPopulation(population)}</Card.MetaValue>
                 </Card.MetaGroup>
               </Card.Content>
             </Card.Item>

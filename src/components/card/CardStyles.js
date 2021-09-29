@@ -8,6 +8,11 @@ export const Frame = styled.main`
 `
 export const Heading = styled.h2`
   margin-bottom: 1.6em;
+  margin-top: -1.5em;
+
+  @media (max-width: 600px) {
+    margin-top: 0;
+  }
 `
 
 export const Item = styled(Link)`
@@ -51,7 +56,7 @@ export const CountryName = styled.h2`
 
 export const MetaGroup = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 0.56em;
 `
 

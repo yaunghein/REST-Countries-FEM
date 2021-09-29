@@ -4,12 +4,28 @@ import { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getSelectedCountry, removeSelectedCountry, getRelatedCountries } from '../redux/countries/actions'
 import { DetailsSkeleton, CardSkeleton } from '../utility-components'
+import { formatPopulation } from '../helpers/formatPopulation'
 
 const DetailsContainer = () => {
   const { country } = useParams()
   const history = useHistory()
-  const { isLoading, selectedCountry, relatedCountries } = useSelector(globalState => globalState.countriesState)
-  const { name, flags, tld, region, subregion, unMember, capital, borders } = selectedCountry
+  const { isLoading, selectedCountry, relatedCountries, countries } = useSelector(
+    globalState => globalState.countriesState
+  )
+  const {
+    name,
+    nativeName,
+    population,
+    flags,
+    topLevelDomain,
+    region,
+    subregion,
+    capital,
+    currencies,
+    languages,
+    timezones,
+    borders,
+  } = selectedCountry
 
   const dispatch = useDispatch()
   const isInitialRender = useRef(true)
@@ -45,19 +61,19 @@ const DetailsContainer = () => {
       <>
         <Details>
           <Details.Frame>
-            <Details.Flag src={flags && flags[0]} alt={`${name?.common}-flag`} />
+            <Details.Flag src={flags?.svg} alt={`${name}-flag`} />
             <Details.Content>
-              <Details.CountryName>{name?.common}</Details.CountryName>
+              <Details.CountryName>{name}</Details.CountryName>
               <Details.MetaFrame>
                 <Details.MetaGroup>
                   <Card.MetaGroup>
-                    <Card.MetaKey>Official Name:</Card.MetaKey>
-                    <Card.MetaValue>{name?.official}</Card.MetaValue>
+                    <Card.MetaKey>Native Name:</Card.MetaKey>
+                    <Card.MetaValue>{nativeName}</Card.MetaValue>
                   </Card.MetaGroup>
 
                   <Card.MetaGroup>
                     <Card.MetaKey>Population:</Card.MetaKey>
-                    <Card.MetaValue>Fix API v3, please 😂</Card.MetaValue>
+                    <Card.MetaValue>{formatPopulation(population)}</Card.MetaValue>
                   </Card.MetaGroup>
 
                   <Card.MetaGroup>
@@ -78,39 +94,45 @@ const DetailsContainer = () => {
                 <Details.MetaGroup>
                   <Card.MetaGroup>
                     <Card.MetaKey>Top Level Domain:</Card.MetaKey>
-                    <Card.MetaValue>{tld && tld[0]}</Card.MetaValue>
+                    <Card.MetaValue>{topLevelDomain && topLevelDomain[0]}</Card.MetaValue>
                   </Card.MetaGroup>
 
                   <Card.MetaGroup>
                     <Card.MetaKey>Currencies:</Card.MetaKey>
                     <Card.MetaValue>
-                      {/* {currencies ? currencies.map(currency => currency.name).join(', ') : 'not provided!'} */}
-                      Fix API v3, please 😂
+                      {currencies
+                        ? currencies.map(currency => `${currency.name} ( ${currency.symbol} )`).join(', ')
+                        : 'not provided!'}
                     </Card.MetaValue>
                   </Card.MetaGroup>
 
                   <Card.MetaGroup>
                     <Card.MetaKey>Languages:</Card.MetaKey>
-                    <Card.MetaValue>
-                      {/* {languages && languages.map(language => language.name).join(', ')} */}
-                      Fix API v3, please 😂
-                    </Card.MetaValue>
+                    <Card.MetaValue>{languages && languages.map(language => language.name).join(', ')}</Card.MetaValue>
                   </Card.MetaGroup>
 
                   <Card.MetaGroup>
-                    <Card.MetaKey>UN Member:</Card.MetaKey>
-                    <Card.MetaValue>{unMember ? 'Yes' : 'No'}</Card.MetaValue>
+                    <Card.MetaKey>Timezone:</Card.MetaKey>
+                    <Card.MetaValue>{timezones && timezones.map(timezone => timezone).join(', ')}</Card.MetaValue>
                   </Card.MetaGroup>
                 </Details.MetaGroup>
               </Details.MetaFrame>
 
               <Details.BorderCountriesFrame>
-                <Card.MetaKey>Border Countries:</Card.MetaKey>
+                <Card.MetaKey style={{ width: '33%' }}>Border Countries:</Card.MetaKey>
                 <Details.BorderCountriesGroup>
-                  <Details.BorderCountry>Zzz</Details.BorderCountry>
+                  {selectedCountry.borders
+                    ? countries.map(
+                        (country, index) =>
+                          selectedCountry.borders.includes(country.alpha3Code) && (
+                            <Details.BorderCountry key={index} to={`/${country.name}`}>
+                              {country.name}
+                            </Details.BorderCountry>
+                          )
+                      )
+                    : 'No border country.'}
                 </Details.BorderCountriesGroup>
               </Details.BorderCountriesFrame>
-
               <Details.BackButton onClick={() => history.goBack()}>
                 <img src='./icons/arrow.svg' alt='' />
                 Back
@@ -126,25 +148,25 @@ const DetailsContainer = () => {
           <Card.Frame>
             {isLoading && <CardSkeleton />}
             {relatedCountries
-              .filter(country => country.name.common !== selectedCountry?.name?.common)
+              .filter(country => country.name !== selectedCountry?.name)
               .map(country => {
-                const { id, flags, name, region, capital, unMember } = country
+                const { id, flags, name, region, capital, population } = country
                 return (
-                  <Card.Item key={id} to={`/${name.common.toLowerCase()}`}>
-                    <Card.Flag src={flags[0]} alt={`${name.common}-flag`} />
+                  <Card.Item key={id} to={`/${name.toLowerCase()}`}>
+                    <Card.Flag src={flags?.svg} alt={`${name}-flag`} />
                     <Card.Content>
-                      <Card.CountryName>{name.common}</Card.CountryName>
+                      <Card.CountryName>{name}</Card.CountryName>
                       <Card.MetaGroup>
                         <Card.MetaKey>Region:</Card.MetaKey>
                         <Card.MetaValue>{region}</Card.MetaValue>
                       </Card.MetaGroup>
                       <Card.MetaGroup>
                         <Card.MetaKey>Capital:</Card.MetaKey>
-                        <Card.MetaValue>{capital || 'Not provided.'}</Card.MetaValue>
+                        <Card.MetaValue>{capital || 'Not provided'}</Card.MetaValue>
                       </Card.MetaGroup>
                       <Card.MetaGroup>
-                        <Card.MetaKey>UN Member: </Card.MetaKey>
-                        <Card.MetaValue>{unMember ? 'Yes' : 'No'}</Card.MetaValue>
+                        <Card.MetaKey>Population: </Card.MetaKey>
+                        <Card.MetaValue>{population}</Card.MetaValue>
                       </Card.MetaGroup>
                     </Card.Content>
                   </Card.Item>
